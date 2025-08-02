@@ -1,0 +1,83 @@
+Prompt Lengkap (Tanpa Kode) untuk AI: Pembuatan Aplikasi Web Manajemen ISP
+Tujuan Utama:
+Buat sebuah aplikasi web (Web App) yang berfungsi penuh dan siap pakai (production-ready) untuk manajemen penyedia layanan internet (ISP). Aplikasi ini harus memiliki tiga peran pengguna utama: Pelanggan, Teknisi, dan Administrator.
+
+1. Teknologi yang Digunakan
+Frontend: Bangun antarmuka pengguna menggunakan React.js. Untuk desain komponen seperti tombol, form, dan tabel, gunakan library MUI (Material-UI) agar tampilan terlihat modern dan profesional.
+
+Backend: Buat server aplikasi menggunakan Node.js dengan framework Express.js untuk mengelola semua logika bisnis dan API.
+
+Database: Gunakan MongoDB sebagai basis data untuk menyimpan semua informasi aplikasi.
+
+Autentikasi: Terapkan sistem login yang aman menggunakan JSON Web Tokens (JWT) untuk memverifikasi pengguna di setiap permintaan.
+
+Pembayaran: Sediakan fitur pembayaran yang siap diintegrasikan dengan penyedia layanan pembayaran. Untuk saat ini, buat simulasi proses pembayaran yang bisa ditandai lunas secara manual oleh pengguna atau admin.
+
+Real-time: Gunakan Socket.io agar pengguna bisa menerima notifikasi secara langsung di browser tanpa perlu me-refresh halaman, terutama untuk pembaruan status tiket.
+
+2. Peran Pengguna & Hak Akses
+Pelanggan (Customer)
+
+Dapat mendaftarkan akun baru dan memilih paket internet.
+
+Memiliki akses ke dashboard pribadi untuk melihat status layanan dan rincian tagihan.
+
+Bisa melakukan pembayaran tagihan.
+
+Dapat membuat tiket pengaduan atau komplain.
+
+Bisa melacak status dan posisi antrian dari tiket komplain yang dibuatnya.
+
+Teknisi (Technician)
+
+Login menggunakan akun yang telah dibuatkan oleh Administrator.
+
+Dapat melihat daftar tugas (baik instalasi maupun perbaikan) yang diberikan kepadanya.
+
+Fitur Kunci: Harus bisa mengunggah foto sebagai bukti pekerjaan. Saat foto diunggah, sistem wajib secara otomatis mendeteksi dan menyimpan data lokasi GPS (latitude dan longitude) teknisi saat itu juga menggunakan fitur geolokasi dari browser.
+
+Dapat memperbarui status tiket menjadi "Selesai".
+
+Administrator (Admin)
+
+Memiliki akses penuh dan kontrol terhadap seluruh fitur aplikasi.
+
+Dapat mengelola semua akun pengguna, baik pelanggan maupun teknisi (membuat, melihat, mengubah, menghapus).
+
+Memantau semua tiket yang masuk, baik pendaftaran baru maupun komplain.
+
+Berwenang untuk menugaskan tiket kepada teknisi yang tersedia.
+
+Dapat membuat dan mengatur paket-paket langganan internet yang ditawarkan (mengatur nama, harga, dan kecepatan).
+
+Memiliki akses ke dashboard khusus untuk memonitor status jaringan FTTH secara sederhana.
+
+3. Alur Kerja & Detail Fitur
+A. Pendaftaran Pelanggan Baru
+Saat pelanggan baru mendaftar, mereka mengisi formulir yang berisi nama, alamat lengkap untuk instalasi, nomor telepon, email, dan memilih paket internet. Setelah formulir dikirim, sistem secara otomatis membuatkan akun untuk pelanggan tersebut dengan status "Menunggu Instalasi" dan juga membuat sebuah tiket layanan baru dengan jenis "Instalasi Baru" yang langsung terlihat oleh Admin.
+
+B. Sistem Tiket Komplain & Antrian
+Ketika pelanggan mengajukan komplain, sebuah tiket baru akan dibuat dengan status "Open". Sistem harus segera memberitahu pelanggan posisi antrian mereka. Posisi antrian ini dihitung berdasarkan jumlah tiket lain yang statusnya masih "Open" atau "In Progress" yang masuk sebelum tiket pelanggan ini. Ketika Admin menugaskan teknisi, status tiket berubah menjadi "In Progress" dan pelanggan akan mendapat notifikasi.
+
+C. Modul Teknisi dengan Bukti Foto & GPS Real-time
+Teknisi yang mengerjakan tugas harus mengunggah foto bukti setelah selesai. Prosesnya adalah, teknisi menekan tombol unggah, lalu sistem akan meminta akses lokasi dari browser. Data lokasi (latitude dan longitude) ini harus diambil dan dikirimkan bersamaan dengan file foto ke server untuk disimpan sebagai bukti valid.
+
+D. Sistem Pembayaran Tagihan
+Sistem harus bisa secara otomatis menghasilkan tagihan untuk semua pelanggan aktif setiap awal periode (misalnya awal bulan). Pelanggan akan melihat tagihan ini di dashboard mereka dengan status "Belum Dibayar" dan memiliki opsi untuk membayarnya. Setelah pembayaran disimulasikan, statusnya akan berubah menjadi "Lunas".
+
+E. Dashboard Monitoring FTTH
+Buat sebuah halaman khusus untuk Admin yang menampilkan daftar area atau titik jaringan utama (node). Di halaman ini, Admin harus bisa mengubah status setiap titik secara manual untuk menandainya sebagai Online, Mengalami Gangguan, atau Offline.
+
+4. Struktur Data / Database
+Rancang struktur database untuk menyimpan informasi berikut:
+
+Data Pengguna: Setiap pengguna (pelanggan, teknisi, admin) harus memiliki data seperti nama, email (unik), kata sandi (terenkripsi), nomor telepon, alamat, peran, dan status akun. Pengguna pelanggan juga harus terhubung dengan paket langganan yang mereka pilih.
+
+Data Tiket: Setiap tiket harus mencatat ID pelanggan, ID teknisi yang menangani, jenis tiket (instalasi atau komplain), deskripsi lengkap masalah, status tiket saat ini, tanggal dibuat, serta menyimpan data bukti pekerjaan yang terdiri dari link ke foto, waktu pengambilan foto, dan koordinat GPS.
+
+Data Tagihan: Setiap tagihan harus terhubung ke seorang pelanggan, mencatat periode tagihan (misalnya '2025-08'), jumlah yang harus dibayar, dan statusnya (apakah sudah lunas atau belum).
+
+Data Paket Langganan: Setiap paket harus menyimpan informasi tentang nama paket, harga bulanan, dan deskripsi kecepatan atau manfaat lainnya.
+
+Perintah Akhir:
+Bangun aplikasi web ini secara lengkap sesuai semua spesifikasi di atas. Pastikan kode terstruktur dengan baik, aman, dan siap untuk di-deploy. Jangan gunakan data dummy, buatlah sistem yang bisa diisi dengan data nyata dan berfungsi secara logis dari awal hingga akhir.
