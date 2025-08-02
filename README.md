@@ -2,7 +2,7 @@
 
 <img src="https://via.placeholder.com/600x200.png?text=Aplikasi+Manajemen+ISP" alt="Project Banner" width="600"/>
 
-<h1>Aplikasi Manajemen ISP Terpadu</h1>
+<h1>Aplikasi Manajemen ISP </h1>
 
 <p>
 Solusi web lengkap untuk manajemen ISP (Billing & E-Ticketing). Mengotomatiskan penagihan, mengelola komplain, dan memvalidasi pekerjaan teknisi dengan bukti lokasi GPS secara real-time.
